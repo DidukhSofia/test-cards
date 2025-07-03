@@ -1,0 +1,33 @@
+.filter {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0px auto;
+}
+
+.histogram {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 80px;
+  z-index: 1;
+}
+
+.bar {
+  width: 4px;
+  margin: 0 0.5px;
+  background-color: lightgray;
+  display: inline-block;
+}
+
+.inputs {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 1rem;
+}
+.input {
+    width: 100%;
+}

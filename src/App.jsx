@@ -1,14 +1,15 @@
-import './App.css'
+import { CardProvider } from "./context/CardContext";
+import ListCards from "./components/ListCards/ListCards";
+import Filter from "./components/Filter/Filter";
 import "./assets/styles/reset.scss"
-import ListCards from './components/ListCards/ListCards'
 
 function App() {
-
   return (
-    <>
+    <CardProvider>
+      <Filter />
       <ListCards />
-    </>
-  )
+    </CardProvider>
+  );
 }
 
-export default App
+export default App;

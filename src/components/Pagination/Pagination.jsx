@@ -19,8 +19,6 @@ function PaginationControls({
     onPageSizeChange(value);
   };
 
-  if (totalPages <= 1) return null;
-
   return (
     <div className={styles.pagination}>
       <Pagination

@@ -1,0 +1,33 @@
+@use '../../assets/styles/variables.scss' as *;
+@use '../../assets/styles/mixins.scss' as *;
+
+.ordering {
+    display: flex;
+    justify-content: space-between;
+    background: #dbdbdb72;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0px auto;
+    padding: 20px;
+    border-radius: 5px;
+    &__btns {
+        display: flex;
+        gap: 20px;
+    }
+    &__button {
+        padding: 6px 14px;
+        @include gray-text;
+        border: 1px solid $gray;
+        border-radius: 100px;
+        background: white;
+    }
+    &__active {
+        background-color: #747475;
+        color: white;
+        border-color: #747475;
+    }
+    &__text {
+        @include gray-text;
+    }
+}

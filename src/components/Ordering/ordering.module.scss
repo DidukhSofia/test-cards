@@ -2,18 +2,24 @@
 @use '../../assets/styles/mixins.scss' as *;
 
 .ordering {
-    display: flex;
-    justify-content: space-between;
-    background: #dbdbdb72;
-    align-items: center;
+
     width: 100%;
-    max-width: 1400px;
+    max-width: 1440px;
     margin: 0px auto;
     padding: 20px;
-    border-radius: 5px;
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        background: #dbdbdb72;
+        align-items: center;
+        border-radius: 5px;
+        padding: 20px;
+        gap: 20px;
+    }
     &__btns {
         display: flex;
         gap: 20px;
+        flex-wrap: wrap;
     }
     &__button {
         padding: 6px 14px;
@@ -29,5 +35,18 @@
     }
     &__text {
         @include gray-text;
+    }
+}
+
+
+@media screen and (max-width: map-get($breakpoints, 'tablet')) {
+    .ordering {
+        &__container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        &__btns {
+            gap: 10px;
+        }
     }
 }

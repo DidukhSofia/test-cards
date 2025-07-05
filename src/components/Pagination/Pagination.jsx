@@ -45,6 +45,7 @@ function PaginationControls({
       <div className={styles.pagination__counter}>
         <p className={styles.pagination__counter_text}>Results per page:</p>
         <TextField
+          className={styles.pagination__counter_wrapper}
           type="number"
           value={pageSize}
           size="small"

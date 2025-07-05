@@ -9,6 +9,7 @@ export const useCards = () => useContext(CardContext);
 export const CardProvider = ({ children }) => {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filteredCardsCount, setFilteredCardsCount] = useState(0);
 
   const [priceRange, setPriceRange] = useState([0, Infinity]);
 
@@ -21,6 +22,7 @@ export const CardProvider = ({ children }) => {
           ...doc.data(),
         }));
         setCards(data);
+
       } catch (error) {
         console.error("Error retrieving data:", error);
       } finally {
@@ -32,7 +34,7 @@ export const CardProvider = ({ children }) => {
   }, []);
 
   return (
-    <CardContext.Provider value={{ cards, setCards, loading, priceRange, setPriceRange }}>
+    <CardContext.Provider value={{ cards, setCards, loading, priceRange, setPriceRange, filteredCardsCount, setFilteredCardsCount}}>
       {children}
     </CardContext.Provider>
   );

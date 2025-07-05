@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCards } from "../../context/CardContext";
 import Card from "../Card/Card";
 import PaginationControls from "../Pagination/Pagination";
@@ -6,11 +6,10 @@ import styles from "./listCards.module.scss";
 import Ordering from "../Ordering/Ordering";
 
 function ListCards() {
-  const { cards, priceRange, loading } = useCards();
+  const { cards, priceRange, setFilteredCardsCount } = useCards();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(8);
   const [sortOrder, setSortOrder] = useState("asc");
-
 
   const [minPrice, maxPrice] = priceRange;
 
@@ -18,6 +17,10 @@ function ListCards() {
     const price = Number(card.prize);
     return price >= minPrice && price <= maxPrice;
   });
+  useEffect (() => {
+    setFilteredCardsCount(filteredCards.length)
+  }, [filteredCards.length, setFilteredCardsCount])
+
 
   const sortedCards = [...filteredCards].sort((a, b) => {
     if (sortOrder === "priceAsc") {

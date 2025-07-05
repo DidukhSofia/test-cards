@@ -1,5 +1,3 @@
-// src/components/IOSSwitch/IOSSwitch.jsx
-import React from "react";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
 

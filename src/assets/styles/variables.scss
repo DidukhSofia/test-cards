@@ -5,3 +5,9 @@
 
 $font: 'Roboto';
 $gray: rgba(128, 128, 128, 0.69);
+
+$breakpoints: (
+  'mobile': '500px',
+  'tablet': '980px',
+  'desktop': '1600px'
+);

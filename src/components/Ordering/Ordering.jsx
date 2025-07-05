@@ -3,6 +3,7 @@ import styles from "./ordering.module.scss";
 function Ordering({ sortOrder, onSortChange }) {
   return (
     <div className={styles.ordering}>
+      <div className={styles.ordering__container}>
       <span className={styles.ordering__text}>Order by:</span>
       <div className={styles.ordering__btns}>
       <button
@@ -16,6 +17,7 @@ function Ordering({ sortOrder, onSortChange }) {
       >
         Newest Listings
       </button>
+      </div>
       </div>
     </div>
   );

@@ -110,7 +110,7 @@ function Filter() {
         {filteredBins.map((bin, i) => (
           <div
             key={i}
-            className={`${styles.filter__histogram_bar} ${bin.isInRange ? styles.barVisible : styles.barHidden}`}
+            className={`${styles.filter__histogram_bar} ${bin.isInRange ? styles.filter__histogram_barVisible : styles.filter__histogram_barHidden}`}
             style={{
               height: bin.isInRange ? `${(bin.count / maxBin) * 100}%` : '0%',
               width: `${100 / bins.length}%`,

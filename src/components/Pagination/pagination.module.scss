@@ -8,6 +8,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
+
     &__counter {
         display: flex;
         align-items: center;
@@ -15,5 +17,11 @@
         &_text {
             @include gray-text;
         }
+    }
+}
+
+@media screen and (max-width: map-get($breakpoints, 'tablet')) {
+    .pagination {
+        flex-direction: column;
     }
 }

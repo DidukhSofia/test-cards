@@ -1,5 +1,6 @@
 @use '../../assets/styles/variables.scss' as *;
 @use '../../assets/styles/mixins.scss' as *;
+
 .filter {
   padding: 50px;
   display: flex;
@@ -7,40 +8,62 @@
   width: 100%;
   max-width: 1440px;
   margin: 0px auto;
+
   &__histogram {
     display: flex;
     justify-content: center;
     align-items: flex-end;
     height: 80px;
     z-index: 1;
+
     &_bar {
       width: 4px;
       margin: 0 0.5px;
       background-color: lightgray;
       display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    &_barVisible {
+      background-color: lightgray;
+      opacity: 1;
+    }
+
+    &_barHidden {
+      background-color: #e0e0e0;
+      opacity: 0.3;
     }
   }
+
   &__slider {
     color: black !important;
     padding: 0px !important;
     z-index: 2;
+
     :global(.MuiSlider-track) {
-    background: black;
+      background-color: black;
+    }
+
+    :global(.MuiSlider-rail) {
+      background-color: $gray;
+    }
   }
-  
-  :global(.MuiSlider-rail) {
-    background-color: $gray;
-  }
-  }
+
   &__inputs {
     display: flex;
     justify-content: center;
     gap: 30px;
     margin-top: 30px;
   }
+
   &__input {
     width: 100%;
 
   }
 }
 
+@media screen and (max-width: map-get($breakpoints, 'tablet')) {
+  .filter {
+    padding: 20px;
+  }
+}

@@ -7,8 +7,42 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        border-bottom: 1px solid $gray;
+        max-width: 1440px;
+        margin: 0px auto;
     }
     &__title {
-        @include bold-text
+        @include bold-text;
+
+        &_count {
+            padding: 10px 20px;
+            @include bold-text;
+            max-width: 1440px;
+            width: 100%;
+            margin: 0px auto;
+        }
+    }
+    &__switch {
+        max-width: 1440px;
+        margin: 0px auto;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+        &_title {
+            @include bold-text;
+            margin-bottom: 20px;
+        }
+        &_average {
+            @include gray-text
+        }
+    }
+}
+
+@media screen and (max-width: map-get($breakpoints, 'tablet')) {
+    .main {
+        &__switch {
+            flex-direction:column-reverse;
+        }
     }
 }

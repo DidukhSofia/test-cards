@@ -80,18 +80,39 @@ function Filter() {
     }
   };
 
-  const maxBin = Math.max(...bins);
+  const getFilteredBins = () => {
+    const binSize = (max - min) / bins.length;
+    const currentMin = sliderValue[0];
+    const currentMax = sliderValue[1];
+    
+    return bins.map((count, i) => {
+      const binStart = min + i * binSize;
+      const binEnd = min + (i + 1) * binSize;
+      
+      const isInRange = binEnd > currentMin && binStart < currentMax;
+      
+      return {
+        count,
+        isInRange,
+        binStart,
+        binEnd
+      };
+    });
+  };
+
+  const filteredBins = getFilteredBins();
+  const maxBin = Math.max(...filteredBins.map(bin => bin.isInRange ? bin.count : 0));
   if (!cards.length) return <p>Завантаження фільтра...</p>;
 
   return (
     <div className={styles.filter}>
-      <div className={styles.histogram}>
-        {bins.map((count, i) => (
+      <div className={styles.filter__histogram}>
+        {filteredBins.map((bin, i) => (
           <div
             key={i}
-            className={styles.bar}
+            className={`${styles.filter__histogram_bar} ${bin.isInRange ? styles.barVisible : styles.barHidden}`}
             style={{
-              height: `${(count / maxBin) * 100}%`,
+              height: bin.isInRange ? `${(bin.count / maxBin) * 100}%` : '0%',
               width: `${100 / bins.length}%`,
             }}
           ></div>
@@ -99,7 +120,7 @@ function Filter() {
       </div>
 
       <Slider
-        className={styles.slider}
+        className={styles.filter__slider}
         value={sliderValue}
         onChange={handleSliderChange}
         onChangeCommitted={handleSliderCommit}
@@ -109,12 +130,12 @@ function Filter() {
         max={max}
       />
 
-      <div className={styles.inputs}>
+      <div className={styles.filter__inputs}>
         <TextField
           label="Min price"
           variant="outlined"
           value={inputMin}
-          className={styles.input}
+          className={styles.filter__input}
           onChange={handleInputChange(setInputMin)}
           onBlur={handleInputConfirm}
           onKeyDown={handleKeyDown}
@@ -123,7 +144,7 @@ function Filter() {
           label="Max price"
           variant="outlined"
           value={inputMax}
-          className={styles.input}
+          className={styles.filter__input}
           onChange={handleInputChange(setInputMax)}
           onBlur={handleInputConfirm}
           onKeyDown={handleKeyDown}

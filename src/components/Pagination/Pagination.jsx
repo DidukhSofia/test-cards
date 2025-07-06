@@ -2,6 +2,7 @@ import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
 import TextField from "@mui/material/TextField";
 import styles from "./pagination.module.scss"
+import { useThemeContext } from "../../context/ThemeContext";
 
 function PaginationControls({
   totalPages,
@@ -10,6 +11,8 @@ function PaginationControls({
   pageSize,
   onPageSizeChange,
 }) {
+  const { isDarkMode } = useThemeContext();
+  
  const maxResultsOfPage = 10;
   const handleInputChange = (e) => {
     let value = Number(e.target.value);
@@ -43,7 +46,7 @@ function PaginationControls({
       />
 
       <div className={styles.pagination__counter}>
-        <p className={styles.pagination__counter_text}>Results per page:</p>
+        <p className={styles.pagination__counter_text} style={{color: isDarkMode ? "lightgray" : "rgba(128, 128, 128, 0.69)"}}>Results per page:</p>
         <TextField
           className={styles.pagination__counter_wrapper}
           type="number"

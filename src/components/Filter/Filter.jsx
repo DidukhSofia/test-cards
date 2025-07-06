@@ -3,6 +3,7 @@ import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
 import styles from "./filter.module.scss";
 import { useCards } from "../../context/CardContext";
+import { useThemeContext } from "../../context/ThemeContext";
 
 function getHistogramBins(prices, numBins = 40) {
   const min = Math.min(...prices);
@@ -11,10 +12,7 @@ function getHistogramBins(prices, numBins = 40) {
 
   const bins = new Array(numBins).fill(0);
   for (const price of prices) {
-    const index = Math.min(
-      Math.floor((price - min) / binSize),
-      numBins - 1
-    );
+    const index = Math.min(Math.floor((price - min) / binSize), numBins - 1);
     bins[index]++;
   }
 
@@ -23,6 +21,7 @@ function getHistogramBins(prices, numBins = 40) {
 
 function Filter() {
   const { cards, setPriceRange } = useCards();
+  const { isDarkMode } = useThemeContext();
   const prices = cards.map((card) => Number(card.prize));
   const { bins, min, max } = getHistogramBins(prices, 50);
 
@@ -84,24 +83,26 @@ function Filter() {
     const binSize = (max - min) / bins.length;
     const currentMin = sliderValue[0];
     const currentMax = sliderValue[1];
-    
+
     return bins.map((count, i) => {
       const binStart = min + i * binSize;
       const binEnd = min + (i + 1) * binSize;
-      
+
       const isInRange = binEnd > currentMin && binStart < currentMax;
-      
+
       return {
         count,
         isInRange,
         binStart,
-        binEnd
+        binEnd,
       };
     });
   };
 
   const filteredBins = getFilteredBins();
-  const maxBin = Math.max(...filteredBins.map(bin => bin.isInRange ? bin.count : 0));
+  const maxBin = Math.max(
+    ...filteredBins.map((bin) => (bin.isInRange ? bin.count : 0))
+  );
   if (!cards.length) return <p>Завантаження фільтра...</p>;
 
   return (
@@ -110,9 +111,13 @@ function Filter() {
         {filteredBins.map((bin, i) => (
           <div
             key={i}
-            className={`${styles.filter__histogram_bar} ${bin.isInRange ? styles.filter__histogram_barVisible : styles.filter__histogram_barHidden}`}
+            className={`${styles.filter__histogram_bar} ${
+              bin.isInRange
+                ? styles.filter__histogram_barVisible
+                : styles.filter__histogram_barHidden
+            }`}
             style={{
-              height: bin.isInRange ? `${(bin.count / maxBin) * 100}%` : '0%',
+              height: bin.isInRange ? `${(bin.count / maxBin) * 100}%` : "0%",
               width: `${100 / bins.length}%`,
             }}
           ></div>
@@ -128,6 +133,18 @@ function Filter() {
         disableSwap
         min={min}
         max={max}
+        sx={{
+          color: isDarkMode ? "white" : "black", // змінює колір активної частини треку
+          "& .MuiSlider-track": {
+            backgroundColor: isDarkMode ? "white" : "black", // фон треку
+          },
+          "& .MuiSlider-rail": {
+            backgroundColor: isDarkMode ? "#555" : "#ccc", // фон позаду треку
+          },
+          "& .MuiSlider-thumb": {
+            backgroundColor: isDarkMode ? "white" : "black", // колір повзунка
+          },
+        }}
       />
 
       <div className={styles.filter__inputs}>

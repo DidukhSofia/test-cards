@@ -19,14 +19,14 @@ function MainPage() {
     return (
     <>
         <div className={styles.main__heading}>
-            <h2 className={styles.main__title}>Filters</h2>
+            <h2 className={styles.main__title} style={{color: isDarkMode ? "white" : "black"}}>Filters</h2>
             <button className={styles.main__close}><CloseIcon /></button>
         </div>
         <div>
         <div className={styles.main__switch}>
             <div className={styles.main__switch_heading}>
-                <h2 className={styles.main__switch_title}>Price Range</h2>
-                <p className={styles.main__switch_average}>The average nightly price is {averagePrice}$</p>
+                <h2 className={styles.main__switch_title} style={{color: isDarkMode ? "white" : "black"}}>Price Range</h2>
+                <p className={styles.main__switch_average} style={{color: isDarkMode ? "lightgray" : "rgba(128, 128, 128, 0.69)"}}>The average nightly price is {averagePrice}$</p>
             </div>
             <FormControlLabel
             control={
@@ -42,7 +42,7 @@ function MainPage() {
       </div>
         </div>
       <Filter />
-      <p className={styles.main__title_count}>{filteredCardsCount} bikes found</p>
+      <p className={styles.main__title_count} style={{color: isDarkMode ? "white" : "black"}}>{filteredCardsCount} bikes found</p>
       <ListCards />
     </>
   );
